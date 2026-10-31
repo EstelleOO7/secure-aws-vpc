@@ -1,0 +1,40 @@
+
+flowchart TB
+    Internet((Internet))
+
+    subgraph AWS["AWS Cloud - eu-north-1"]
+        subgraph VPC["Secure VPC - 10.20.0.0/16"]
+
+            IGW["Internet Gateway"]
+
+            subgraph AZ1["Availability Zone 1 - eu-north-1a"]
+                PUB1["Public Subnet A<br/>10.20.1.0/24"]
+                PRIV1["Private Subnet A<br/>10.20.11.0/24"]
+            end
+
+            subgraph AZ2["Availability Zone 2 - eu-north-1b"]
+                PUB2["Public Subnet B<br/>10.20.2.0/24"]
+                PRIV2["Private Subnet B<br/>10.20.12.0/24"]
+            end
+
+            PUBRT["Public Route Table<br/>0.0.0.0/0 → IGW"]
+            PRIVRT["Private Route Table<br/>No Internet Route"]
+
+            PUB1 --> PUBRT
+            PUB2 --> PUBRT
+            PRIV1 --> PRIVRT
+            PRIV2 --> PRIVRT
+
+            PUBRT --> IGW
+        end
+    end
+
+    Internet --> IGW
+
+    classDef public fill:#d9ead3,stroke:#38761d,color:#000
+    classDef private fill:#cfe2f3,stroke:#1155cc,color:#000
+    classDef network fill:#fff2cc,stroke:#bf9000,color:#000
+
+    class PUB1,PUB2 public
+    class PRIV1,PRIV2 private
+    class IGW,PUBRT,PRIVRT network
