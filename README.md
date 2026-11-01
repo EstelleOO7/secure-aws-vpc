@@ -131,6 +131,6 @@ Any deployment will require a separate cost review and explicit approval.
 
 ## Author
 
-AWS Solutions Architecture Portfolio Project
+Estelle's AWS Solutions Architecture Portfolio Project
 
 Built to demonstrate practical understanding of cloud networking, infrastructure as code, network segmentation and cost-conscious architecture.
